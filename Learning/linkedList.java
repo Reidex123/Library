@@ -49,12 +49,12 @@ public class linkedList<T> implements Iterable<T> {
         Node<T> node = new Node<>(data);
 
         if (this.isEmpty()) {
-            head = node;
+            (this.head) = node;
             this.size++;
             return;
         }
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
         while (current.getLink() != null) {
             current = current.getLink();
         }
@@ -74,8 +74,8 @@ public class linkedList<T> implements Iterable<T> {
 
         Node<T> node = new Node<>(data);
 
-        node.setLink(head);
-        head = node;
+        node.setLink((this.head));
+        (this.head) = node;
 
         this.size++;
 
@@ -89,7 +89,7 @@ public class linkedList<T> implements Iterable<T> {
 
         Node<T> node = new Node<>(data);
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
 
         while (current.getLink() != null) {
             current = current.getLink();
@@ -109,7 +109,7 @@ public class linkedList<T> implements Iterable<T> {
 
         Node<T> node = new Node<>(data);
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
         for (int i = 0; i < index - 1; i++) {
             current = current.getLink();
         }
@@ -132,12 +132,12 @@ public class linkedList<T> implements Iterable<T> {
         }
 
         if (index == 0) {
-            head = head.getLink();
+            (this.head) = (this.head).getLink();
             this.size--;
             return;
         }
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
         Node<T> nodeToDelete;
         for (int i = 0; i < index - 1; i++) {
             current = current.getLink();
@@ -156,7 +156,7 @@ public class linkedList<T> implements Iterable<T> {
             return false;
         }
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
 
         for (int i = 0; i < this.size; i++) {
             if (current.getData() == data) {
@@ -170,7 +170,7 @@ public class linkedList<T> implements Iterable<T> {
 
     public T get(int index) {
         if (index == 0) {
-            return head.getData();
+            return (this.head).getData();
         }
         if (index >= this.size || index < 0) {
             System.out.println("Index out of bounds");
@@ -185,6 +185,20 @@ public class linkedList<T> implements Iterable<T> {
         return current.getData();
     }
 
+    public void clear() {
+        if (isEmpty()) {
+            System.out.println("There's nothing to clear");
+            Runtime.getRuntime().exit(0);
+        }
+
+        for (int i = 0; i < this.getSize(); i++) {
+            (this.head) = (this.head).getLink();
+        }
+
+        this.size = 0;
+    }
+    
+
     public boolean isEmpty() {
         return this.getSize() == 0;
     }
@@ -195,7 +209,8 @@ public class linkedList<T> implements Iterable<T> {
 
     @Override
     public String toString() {
-        if (this.isEmpty()) {
+
+        if (this.head == null || this.isEmpty()) {
             return "The list is empty!!";
         }
         StringBuilder list = new StringBuilder();
