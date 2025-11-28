@@ -100,6 +100,91 @@ public class linkedList<T> implements Iterable<T> {
         this.size++;
     }
 
+    public void addAt(int index, T data) {
+        if (index == 0) {
+            addFirst(data);
+            this.size++;
+            return;
+        }
+
+        Node<T> node = new Node<>(data);
+
+        Node<T> current = head;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.getLink();
+        }
+
+        node.setLink(current.getLink());
+        current.setLink(node);
+        this.size++;
+
+    }
+
+    public void remove(int index) {
+        if (isEmpty()) {
+            System.out.printf("The list has " + this.getSize() + " elements.");
+            Runtime.getRuntime().exit(0);
+        }
+
+        if (index < 0 || index >= this.size) {
+            System.out.println("Index out of Bounds");
+            Runtime.getRuntime().exit(0);
+        }
+
+        if (index == 0) {
+            head = head.getLink();
+            this.size--;
+            return;
+        }
+
+        Node<T> current = head;
+        Node<T> nodeToDelete;
+        for (int i = 0; i < index - 1; i++) {
+            current = current.getLink();
+        }
+
+        nodeToDelete = current.getLink();
+        current.setLink(nodeToDelete.getLink());
+
+        nodeToDelete.setLink(null);
+
+        this.size--;
+    }
+
+    public boolean contains(T data) {
+        if (isEmpty()) {
+            return false;
+        }
+
+        Node<T> current = head;
+
+        for (int i = 0; i < this.size; i++) {
+            if (current.getData() == data) {
+                return true;
+            }
+
+            current = current.getLink();
+        }
+        return false;
+    }
+
+    public T get(int index) {
+        if (index == 0) {
+            return head.getData();
+        }
+        if (index >= this.size || index < 0) {
+            System.out.println("Index out of bounds");
+            Runtime.getRuntime().exit(0);
+        }
+
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.getLink();
+        }
+
+        return current.getData();
+    }
+
     public boolean isEmpty() {
         return this.getSize() == 0;
     }
@@ -116,13 +201,13 @@ public class linkedList<T> implements Iterable<T> {
         StringBuilder list = new StringBuilder();
         Node<T> current = head;
 
+        list.append("[ ");
         for (int i = 0; i < this.getSize() - 1; i++) {
-            list.append(current.getData()).append(" -> ");
+            list.append(current.getData()).append(", ");
             current = current.getLink();
         }
-        list.append(current.getData());
+        list.append(current.getData()).append(" ]");
 
         return list.toString();
     }
-
 }

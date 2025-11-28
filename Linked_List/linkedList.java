@@ -67,7 +67,7 @@ public class linkedList<T> {
         }
 
         Node<T> current = head;
-        Node<T> nodeToDelete = null;
+        Node<T> nodeToDelete;
 
         for (int i = 0; i < index - 1; i++) {
             current = current.getLink();
@@ -76,7 +76,7 @@ public class linkedList<T> {
         nodeToDelete = current.getLink();
         current.setLink(nodeToDelete.getLink());
 
-        nodeToDelete = null;
+        nodeToDelete.setLink(null);
 
         this.size--;
     }
