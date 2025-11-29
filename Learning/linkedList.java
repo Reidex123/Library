@@ -212,7 +212,7 @@ public class linkedList<T> implements Iterable<T> {
 
     public int indexOf(T data) {
         if (isEmpty()) {
-            Runtime.getRuntime().exit(0);
+            return -1;
         }
 
         Node<T> current = head;
@@ -225,7 +225,7 @@ public class linkedList<T> implements Iterable<T> {
             current = current.getLink();
         }
 
-        return (current.getData() == data) ? index : null;
+        return (current.getData() == data) ? index : -1;
     }
 
     public void clear() {
@@ -241,6 +241,9 @@ public class linkedList<T> implements Iterable<T> {
         this.size = 0;
     }
 
+    /**
+     * @param Retrieves but does not remove, the head of this list
+     */
     public T element() {
         if (head != null) {
             return head.getData();
