@@ -185,6 +185,49 @@ public class linkedList<T> implements Iterable<T> {
         return current.getData();
     }
 
+    public T getFirst() {
+        if (!isEmpty()) {
+            return head.getData();
+        } else {
+            return null;
+        }
+    }
+
+    public T getLast() {
+        if (getSize() == 1) {
+            return head.getData();
+        }
+        if (isEmpty()) {
+            return null;
+        }
+
+        Node<T> current = head;
+
+        while (current.getLink() != null) {
+            current = current.getLink();
+        }
+
+        return current.getData();
+    }
+
+    public int indexOf(T data) {
+        if (isEmpty()) {
+            Runtime.getRuntime().exit(0);
+        }
+
+        Node<T> current = head;
+        int index = 0;
+        while (current.getLink() != null) {
+            if (current.getData() == data) {
+                return index;
+            }
+            index++;
+            current = current.getLink();
+        }
+
+        return (current.getData() == data) ? index : null;
+    }
+
     public void clear() {
         if (isEmpty()) {
             System.out.println("There's nothing to clear");
@@ -197,7 +240,15 @@ public class linkedList<T> implements Iterable<T> {
 
         this.size = 0;
     }
-    
+
+    public T element() {
+        if (head != null) {
+            return head.getData();
+        } else {
+            System.out.println("The list is empty!!");
+            return null;
+        }
+    }
 
     public boolean isEmpty() {
         return this.getSize() == 0;
