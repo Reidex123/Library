@@ -228,6 +228,30 @@ public class linkedList<T> implements Iterable<T> {
         return (current.getData() == data) ? index : -1;
     }
 
+    public void offer(T data) {
+        add(data);
+    }
+
+    public void offerFirst(T data) {
+        addFirst(data);
+    }
+
+    public void offerLast(T data) {
+        addLast(data);
+    }
+
+    public T peek() {
+        return get(0);
+    }
+
+    public T peekFirst() {
+        return (isEmpty()) ? null : get(0);
+    }
+
+    public T peekLast() {
+        return (isEmpty()) ? null : getLast();
+    }
+
     public void clear() {
         if (isEmpty()) {
             System.out.println("There's nothing to clear");
