@@ -1,74 +1,145 @@
 package Linked_List;
-public class linkedList<T> {
-    private int size = 0;
+
+import java.util.*;
+
+public class linkedList<T> implements Iterable<T> {
+
     private Node<T> head;
+    private int size;
 
-    public void addLast(T data) {
-        Node<T> node = new Node<T>(data);
-
-        if (this.isEmpty()) {
-            head = node;
-        } else {
-            Node<T> current = head;
-
-            while (current.getLink() != null) {
-                current = current.getLink();
-            }
-
-            current.setLink(node);
-        }
-        size++;
+    public linkedList() {
+        this.head = null;
+        this.size = 0;
     }
 
-    public void addFirst(T data) {
-        if (this.isEmpty()) {
-            this.addLast(data);
+    @Override
+    public Iterator<T> iterator() {
+        return new listIterator(this);
+    }
+
+    private class listIterator implements Iterator<T> {
+
+        Node<T> current;
+
+        public listIterator(linkedList<T> list) {
+            current = list.head;
         }
 
-        Node<T> node = new Node<T>(data);
-        node.setLink(head);
-        head = node;
+        @Override
+        public boolean hasNext() {
+            return current.getLink() != null;
+        }
+
+        @Override
+        public T next() {
+            T data = null;
+
+            if (hasNext()) {
+                current = current.getLink();
+                data = current.getData();
+            } else {
+                System.out.println("The list does not have the next element!!");
+            }
+
+            return data;
+        }
+    }
+
+    // add an element at the end of the list
+    public void add(T data) {
+        Node<T> node = new Node<>(data);
+
+        if (this.isEmpty()) {
+            (this.head) = node;
+            this.size++;
+            return;
+        }
+
+        Node<T> current = (this.head);
+        while (current.getLink() != null) {
+            current = current.getLink();
+        }
+
+        node.setLink(current.getLink());
+        current.setLink(node);
+        this.size++;
+    }
+
+    // add an element at the start of the list
+    public void addFirst(T data) {
+
+        if (this.isEmpty()) {
+            this.add(data);
+            return;
+        }
+
+        Node<T> node = new Node<>(data);
+
+        node.setLink((this.head));
+        (this.head) = node;
+
+        this.size++;
+
+    }
+
+    public void addLast(T data) {
+        if (this.isEmpty()) {
+            this.add(data);
+            return;
+        }
+
+        Node<T> node = new Node<>(data);
+
+        Node<T> current = (this.head);
+
+        while (current.getLink() != null) {
+            current = current.getLink();
+        }
+
+        current.setLink(node);
+
         this.size++;
     }
 
     public void addAt(int index, T data) {
         if (index == 0) {
-            this.addFirst(data);
+            addFirst(data);
+            this.size++;
             return;
         }
 
-        Node<T> node = new Node<T>(data);
-        Node<T> current = head;
+        Node<T> node = new Node<>(data);
 
+        Node<T> current = (this.head);
         for (int i = 0; i < index - 1; i++) {
             current = current.getLink();
         }
 
         node.setLink(current.getLink());
         current.setLink(node);
-
         this.size++;
+
     }
 
-    public void delete(int index) {
-        if (this.isEmpty()) {
-            System.out.println("There's nothing to delete!!");
-            return;
+    public void remove(int index) {
+        if (isEmpty()) {
+            System.out.printf("The list has " + this.getSize() + " elements.");
+            Runtime.getRuntime().exit(0);
         }
-        if (index > this.size) {
-            System.out.println("IndexOutOfBounds");
-            return;
+
+        if (index < 0 || index >= this.size) {
+            System.out.println("Index out of Bounds");
+            Runtime.getRuntime().exit(0);
         }
 
         if (index == 0) {
-            head = head.getLink();
+            (this.head) = (this.head).getLink();
             this.size--;
             return;
         }
 
-        Node<T> current = head;
+        Node<T> current = (this.head);
         Node<T> nodeToDelete;
-
         for (int i = 0; i < index - 1; i++) {
             current = current.getLink();
         }
@@ -81,25 +152,156 @@ public class linkedList<T> {
         this.size--;
     }
 
-    public int getSize() {
-        return size;
+    public boolean contains(T data) {
+        if (isEmpty()) {
+            return false;
+        }
+
+        Node<T> current = (this.head);
+
+        for (int i = 0; i < this.size; i++) {
+            if (current.getData() == data) {
+                return true;
+            }
+
+            current = current.getLink();
+        }
+        return false;
     }
 
-    public String toString() {
-        Node<T> node = head;
-
-        StringBuilder formattedString = new StringBuilder();
-
-        while (node.getLink() != null) {
-            formattedString.append(node.getData()).append(" -> ");
-            node = node.getLink();
+    public T get(int index) {
+        if (index == 0) {
+            return (this.head).getData();
         }
-        formattedString.append(node.getData());
+        if (index >= this.size || index < 0) {
+            System.out.println("Index out of bounds");
+            Runtime.getRuntime().exit(0);
+        }
 
-        return formattedString.toString();
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.getLink();
+        }
+
+        return current.getData();
+    }
+
+    public T getFirst() {
+        if (!isEmpty()) {
+            return head.getData();
+        } else {
+            return null;
+        }
+    }
+
+    public T getLast() {
+        if (getSize() == 1) {
+            return head.getData();
+        }
+        if (isEmpty()) {
+            return null;
+        }
+
+        Node<T> current = head;
+
+        while (current.getLink() != null) {
+            current = current.getLink();
+        }
+
+        return current.getData();
+    }
+
+    public int indexOf(T data) {
+        if (isEmpty()) {
+            return -1;
+        }
+
+        Node<T> current = head;
+        int index = 0;
+        while (current.getLink() != null) {
+            if (current.getData() == data) {
+                return index;
+            }
+            index++;
+            current = current.getLink();
+        }
+
+        return (current.getData() == data) ? index : -1;
+    }
+
+    public void offer(T data) {
+        add(data);
+    }
+
+    public void offerFirst(T data) {
+        addFirst(data);
+    }
+
+    public void offerLast(T data) {
+        addLast(data);
+    }
+
+    public T peek() {
+        return get(0);
+    }
+
+    public T peekFirst() {
+        return (isEmpty()) ? null : get(0);
+    }
+
+    public T peekLast() {
+        return (isEmpty()) ? null : getLast();
+    }
+
+    public void clear() {
+        if (isEmpty()) {
+            System.out.println("There's nothing to clear");
+            Runtime.getRuntime().exit(0);
+        }
+
+        for (int i = 0; i < this.getSize(); i++) {
+            (this.head) = (this.head).getLink();
+        }
+
+        this.size = 0;
+    }
+
+    /**
+     * @param Retrieves but does not remove, the head of this list
+     */
+    public T element() {
+        if (head != null) {
+            return head.getData();
+        } else {
+            System.out.println("The list is empty!!");
+            return null;
+        }
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return this.getSize() == 0;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    @Override
+    public String toString() {
+
+        if (this.head == null || this.isEmpty()) {
+            return "The list is empty!!";
+        }
+        StringBuilder list = new StringBuilder();
+        Node<T> current = head;
+
+        list.append("[ ");
+        for (int i = 0; i < this.getSize() - 1; i++) {
+            list.append(current.getData()).append(", ");
+            current = current.getLink();
+        }
+        list.append(current.getData()).append(" ]");
+
+        return list.toString();
     }
 }
