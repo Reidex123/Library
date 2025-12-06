@@ -1,10 +1,10 @@
-package Linked_List;
+package Singly_LinkedList;
 public class Node<T> {
     private T data;
     private Node<T> link;
 
     public Node(T data) {
-        setData(data);
+        this.data = data;
         this.link = null;
     }
 
