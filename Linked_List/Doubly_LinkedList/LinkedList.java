@@ -62,7 +62,7 @@ public class LinkedList<T> implements Iterable<T> {
         return new listIterator<>(this);
     }
 
-    @SuppressWarnings(value = "Unckecked")
+    @SuppressWarnings(value = { "Unckecked", "hiding" })
     private class listIterator<T> implements Iterator<T> {
         Node<T> current;
 
