@@ -3,6 +3,7 @@ package Doubly_LinkedList;
 import java.util.*;
 
 public class LinkedList<T> implements Iterable<T> {
+
     private Node<T> head;
     private int size;
 
@@ -57,6 +58,53 @@ public class LinkedList<T> implements Iterable<T> {
         this.add(data);
     }
 
+    @SuppressWarnings("UnnecessaryReturnStatement")
+    public void addAt(int index, T data) throws IndexOutOfBoundsException {
+
+        if (index < 0 || index > this.getSize()) {
+            throw new IndexOutOfBoundsException("Operation cannot be performed.");
+        }
+
+        if (index == 0) {
+            addFirst(data);
+            return;
+        }
+
+        if (index == this.getSize()) {
+            addLast(data);
+            return;
+        }
+
+        Node<T> node = new Node<>(data);
+        Node<T> current = head;
+
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+        node.next = current.next;
+        (current.next).prev = node;
+        current.next = node;
+        node.prev = current;
+
+        this.size++;
+
+    }
+
+    public void deleteFirst() {
+        if (head == null) {
+            Runtime.getRuntime().exit(0);
+        }
+
+        if (isEmpty()) {
+            Runtime.getRuntime().exit(0);
+        }
+
+        head = head.next;
+        head.prev = null;
+
+        this.size--;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new listIterator<>(this);
@@ -64,6 +112,7 @@ public class LinkedList<T> implements Iterable<T> {
 
     @SuppressWarnings(value = { "Unckecked", "hiding" })
     private class listIterator<T> implements Iterator<T> {
+
         Node<T> current;
 
         public listIterator(LinkedList<T> list) {
@@ -89,6 +138,10 @@ public class LinkedList<T> implements Iterable<T> {
         }
     }
 
+    public boolean isEmpty() {
+        return (getSize() == 0);
+    }
+
     public int getSize() {
         return this.size;
     }
@@ -103,11 +156,11 @@ public class LinkedList<T> implements Iterable<T> {
         }
 
         list.append("[ ");
-        for (int i = 0; i < this.getSize(); i++) {
+        for (int i = 0; i < this.getSize() - 1; i++) {
             list.append(current.data).append(", ");
             current = current.next;
         }
-        list.append(" ]");
+        list.append(current.data).append(" ]");
 
         return list.toString();
     }
