@@ -19,6 +19,11 @@ public class Main {
         list.deleteFirst();
 
         System.out.println("Size = " + list.getSize()); // 3
-        System.out.print(list.toString()); //[ 2, 6, 3 ]
+        System.out.println(list.toString() + "\n"); //[ 2, 6, 3 ]
+
+        list.deleteLast();
+
+        System.out.println("Size = " + list.getSize()); // 2
+        System.out.print(list.toString()); // [ 2, 6 ]
     }
 }

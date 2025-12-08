@@ -91,16 +91,26 @@ public class LinkedList<T> implements Iterable<T> {
     }
 
     public void deleteFirst() {
-        if (head == null) {
-            Runtime.getRuntime().exit(0);
-        }
-
         if (isEmpty()) {
             Runtime.getRuntime().exit(0);
         }
 
         head = head.next;
         head.prev = null;
+
+        this.size--;
+    }
+
+    public void deleteLast() {
+        if(isEmpty())
+            Runtime.getRuntime().exit(0);
+
+        Node<T> current = head;
+        for (int i = 0; i < this.getSize() -2; i++)
+            current = current.next;
+
+        (current.next).prev = null;
+        current.next = null;
 
         this.size--;
     }
@@ -138,7 +148,7 @@ public class LinkedList<T> implements Iterable<T> {
         }
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return (getSize() == 0);
     }
 
