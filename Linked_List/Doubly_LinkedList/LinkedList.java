@@ -90,6 +90,16 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
+    public void delete(int index) {
+        if (index == 0)
+            deleteFirst();
+
+        if (index == this.getSize() -1)
+            deleteLast();
+
+        
+    }
+
     public void deleteFirst() {
         if (isEmpty()) {
             Runtime.getRuntime().exit(0);
