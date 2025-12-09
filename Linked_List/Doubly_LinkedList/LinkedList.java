@@ -97,7 +97,9 @@ public class LinkedList<T> implements Iterable<T> {
         if (index == this.getSize() -1)
             deleteLast();
 
-        
+        Node<T> current = head;
+        Node<T> nodeToDelete;
+        //incomplete implementation
     }
 
     public void deleteFirst() {
