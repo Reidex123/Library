@@ -24,6 +24,12 @@ public class Main {
         list.deleteLast();
 
         System.out.println("Size = " + list.getSize()); // 2
-        System.out.print(list.toString()); // [ 2, 6 ]
+        System.out.println(list.toString() + "\n"); // [ 2, 6 ]
+
+        System.out.println(list.indexOf(6)); // 1
+
+        System.out.println(list.contains(2)); //true
+        System.out.println(list.contains(10)); //false
+
     }
 }
