@@ -90,16 +90,34 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
-    public void delete(int index) {
-        if (index == 0)
-            deleteFirst();
+    public void delete(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index > this.size)
+            throw new IndexOutOfBoundsException("Index specified is out of bound!!");
 
-        if (index == this.getSize() -1)
+        if (index == 0) {
+            deleteFirst();
+        }
+
+        if (index == this.getSize() - 1) {
             deleteLast();
+            return;
+        }
 
         Node<T> current = head;
         Node<T> nodeToDelete;
-        //incomplete implementation
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+        }
+
+        nodeToDelete = current.next;
+        current.next = nodeToDelete.next;
+        (nodeToDelete.next).prev = current;
+
+        nodeToDelete.next = null;
+        nodeToDelete.prev = null;
+
+        this.size--;
+
     }
 
     public void deleteFirst() {
