@@ -1,3 +1,9 @@
+/**
+ * Implementation of one of the Data Structures (Doubly LinkedList).
+ * @author Koketso Gaowelwe
+ * 2025/12/01 --> 2025/12/13
+ */
+
 package Doubly_LinkedList;
 
 import java.util.*;
@@ -12,6 +18,9 @@ public class LinkedList<T> implements Iterable<T> {
         this.size = 0;
     }
 
+    /**
+     * @param Add an element in the list. The elements are added as a form of a stack
+     */
     public void add(T data) {
         if (data == null) {
             return;
@@ -34,6 +43,9 @@ public class LinkedList<T> implements Iterable<T> {
         this.size++;
     }
 
+    /**
+     * @param Add the element as the first/head in the list
+     */
     public void addFirst(T data) {
         if (data == null) {
             return;
@@ -54,10 +66,17 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
+    /**
+     * @param Add the element at last place in the list
+     */
     public void addLast(T data) {
         this.add(data);
     }
 
+    /**
+     * @param Add an element at a specified index.
+     * Index has to be 0 <= index < size
+     */
     @SuppressWarnings("UnnecessaryReturnStatement")
     public void addAt(int index, T data) throws IndexOutOfBoundsException {
 
@@ -90,6 +109,9 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
+    /**
+     * @param Delete an element in the list at a specified index
+     */
     public void delete(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index > this.size)
             throw new IndexOutOfBoundsException("Index specified is out of bound!!");
@@ -104,7 +126,7 @@ public class LinkedList<T> implements Iterable<T> {
         }
 
         Node<T> current = head;
-        Node<T> nodeToDelete;
+        Node<T> nodeToDelete; // will reference temp variable to be disconnected from the linkedlist
         for (int i = 0; i < index - 1; i++) {
             current = current.next;
         }
@@ -120,6 +142,9 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
+    /**
+     * @param Remove the first node from the list
+     */
     public void deleteFirst() {
         if (isEmpty()) {
             Runtime.getRuntime().exit(0);
@@ -131,6 +156,9 @@ public class LinkedList<T> implements Iterable<T> {
         this.size--;
     }
 
+    /**
+     * @param Delete the last node from the list
+     */
     public void deleteLast() {
         if (isEmpty())
             Runtime.getRuntime().exit(0);
@@ -145,13 +173,17 @@ public class LinkedList<T> implements Iterable<T> {
         this.size--;
     }
 
+    /**
+     * @param Obtain the index of the given element. If it's not in the list
+     * return -1
+     */
     public int indexOf(T data) {
         if (isEmpty()) {
             return -1;
         }
 
         Node<T> current = head;
-
+        // traverse over the nodes
         for (int i = 0; i < this.getSize(); i++) {
             if (current.data == data) {
                 return i;
@@ -163,6 +195,9 @@ public class LinkedList<T> implements Iterable<T> {
 
     }
 
+    /**
+     * @param check if the given element do exist inside the list
+     */
     public boolean contains(T data) {
         if (isEmpty()) {
             return false;
@@ -203,14 +238,22 @@ public class LinkedList<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * @param check if the list is empty, return false if so
+     * */
+
     private boolean isEmpty() {
         return (getSize() == 0);
     }
 
+    // obtain the size of the list
     public int getSize() {
         return this.size;
     }
 
+    /**
+     * @param Obtain String representation of the list
+     */
     @Override
     public String toString() {
         StringBuilder list = new StringBuilder();
@@ -226,6 +269,20 @@ public class LinkedList<T> implements Iterable<T> {
             current = current.next;
         }
         list.append(current.data).append(" ]");
+
+        /**
+         * Showing the ability to traverse backwards in the doubly linkedlist
+         */
+        // current = current.prev;
+        // for (int i = 0; i < this.getSize() - 1; i++) {
+
+        //     if (i == this.getSize() - 2) {
+        //         list.append(current.data).append(" ]");
+        //         break;
+        //     }
+        //     list.append(current.data).append(", ");
+        //     current = current.prev;
+        // }
 
         return list.toString();
     }

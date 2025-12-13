@@ -1,3 +1,9 @@
+/**
+ * Test program of the methods implemented in the Doubly LinkedList
+ * @author Koketso Gaowelwe
+ * 2025/12/01 --> 2025/12/13
+ */
+
 package Doubly_LinkedList;
 
 public class Main {
@@ -29,7 +35,7 @@ public class Main {
         System.out.println(list.indexOf(6)); // 1
 
         System.out.println(list.contains(2)); //true
-        System.out.println(list.contains(10) + "\n"); //false
+        System.out.println(list.contains(10)); //false
 
         list.delete(1);
 

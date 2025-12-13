@@ -1,3 +1,9 @@
+/**
+ * Blueprint of a node object
+ * @author Koketso Gaowelwe
+ * 2025/12/01
+ */
+
 package Doubly_LinkedList;
 
 public class Node<T> {
@@ -40,6 +46,7 @@ public class Node<T> {
         this.prev = prev;
     }
 
+    // String representation of the data held by the node
     @Override
     public String toString() {
         if (this.getData() != null) {
