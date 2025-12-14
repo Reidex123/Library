@@ -43,6 +43,13 @@ public class LinkedList<T> implements Iterable<T> {
         this.size++;
     }
 
+    public T element(){
+        if(head!=null){
+            return head.data;
+        }
+        return null;
+    }
+
     /**
      * @param Add the element as the first/head in the list
      */
