@@ -43,6 +43,9 @@ public class LinkedList<T> implements Iterable<T> {
         this.size++;
     }
 
+    /**
+     * @param Return the first element of this list
+     */
     public T element(){
         if(head!=null){
             return head.data;
@@ -147,6 +150,31 @@ public class LinkedList<T> implements Iterable<T> {
 
         this.size--;
 
+    }
+
+    /**
+     * @param Remove all the elements from the list
+     */
+    public void clear() {
+
+        if (isEmpty()) {
+            Runtime.getRuntime().exit(0);
+        }
+
+        if (getSize() == 1) {
+            deleteFirst();
+            return;
+        }
+
+        try{
+            do {
+                deleteFirst();
+            } while (getSize() != 0);
+        }
+        catch(Exception e){
+            System.out.println("Failed to do the operation!! (line 169)");
+            Runtime.getRuntime().exit(0);
+        }
     }
 
     /**
