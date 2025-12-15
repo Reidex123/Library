@@ -1,7 +1,7 @@
 /**
  * Implementation of one of the Data Structures (Doubly LinkedList).
  * @author Koketso Gaowelwe
- * 2025/12/01 --> 2025/12/13
+ * 2025/12/01 --> 2025/12/15
  */
 
 package Doubly_LinkedList;
