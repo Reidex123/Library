@@ -286,6 +286,45 @@ public class LinkedList<T> implements Iterable<T> {
         return this.size;
     }
 
+    public T get(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index > getSize()) {
+            throw new IndexOutOfBoundsException("Index is out of bound!!");
+        }
+
+        if (index == 0) {
+            return element();
+        }
+
+        if (index == getSize() - 1) {
+            return getLast();
+        }
+
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.data;
+
+    }
+
+    public T getFirst() {
+        return element();
+    }
+
+    public T getLast() {
+        if (getSize() == 1) {
+            return element();
+        }
+
+        else {
+            Node<T> current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+
+            return current.data;
+        }
+    }
     /**
      * @param Obtain String representation of the list
      */

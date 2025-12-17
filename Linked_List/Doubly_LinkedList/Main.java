@@ -32,15 +32,17 @@ public class Main {
         System.out.println("Size = " + list.getSize()); // 2
         System.out.println(list.toString() + "\n"); // [ 2, 6 ]
 
-        System.out.println(list.indexOf(6)); // 1
+        System.out.println(list.indexOf(6) + "\n"); // 1
 
         System.out.println(list.contains(2)); //true
-        System.out.println(list.contains(10)); //false
+        System.out.println(list.contains(10) + "\n"); //false
 
         list.delete(1);
 
         System.out.println("Size = " + list.getSize()); // 1
-        System.out.println(list.toString()); // [ 2 ]
+        System.out.println(list.toString() + "\n"); // [ 2 ]
+
+        System.out.println(list.get(0)); // 2
 
     }
 }
