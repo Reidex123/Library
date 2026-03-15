@@ -1,44 +1,33 @@
 package BinaryTrees;
 
 public class redBlack<T extends Comparable<T>> {
-    public treeNode root;
+
+    public treeNode<T> root;
+
 
     public void insert(T data) {
-        treeNode<T> nodeToInsert = new treeNode<>(data);
 
-        this.root = insert(nodeToInsert, this.root);
-
-    }
-
-    private treeNode<T> insert(treeNode<T> nodeToInsert, treeNode<T> node) {
-
-        if (isEmpty()) {
-            return nodeToInsert;
-        }
-
-        if (nodeToInsert.data.compareTo(node.data) < 0) {
-            node.left = insert(nodeToInsert, node.left);
-            nodeToInsert.parent = node.parent;
-        }
-        else if (nodeToInsert.data.compareTo(node.data) > 0) {
-            node.right = insert(nodeToInsert, node.right);
-            nodeToInsert.parent = node.parent;
-        }
-
-        return recolor(nodeToInsert, node);
-    }
-
-    private treeNode<T> recolor(treeNode<T> node1, treeNode<T> node2) {
-        return null;
+        this.root = this.insert(data, root);
 
     }
 
+    private treeNode<T> insert(T data, treeNode<T> node) {
+        if (node == null) {
+            return new treeNode<>(data);
+        }
 
+        if (data.compareTo(node.data) < 0) {
+            node.left = this.insert(data, node.left);
+        } else if (data.compareTo(node.data) > 0) {
+            node.right = this.insert(data, node.right);
+        }
 
+        return this.balance(node);
 
+    }
 
-    public boolean isEmpty() {
-        return null == this.root;
+    private treeNode<T> balance(treeNode<T> node) {
+
     }
 
 }
